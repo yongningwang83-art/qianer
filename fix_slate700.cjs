@@ -1,0 +1,10 @@
+const fs = require('fs');
+let content = fs.readFileSync('src/App.tsx', 'utf8');
+content = content.replace(/bg-slate-700/g, 'bg-[#1e3a8a]');
+content = content.replace(/bg-slate-600/g, 'bg-[#1e3a8a]/80');
+content = content.replace(/border-slate-600/g, 'border-[#1e3a8a]');
+content = content.replace(/text-slate-400/g, 'text-cyan-400/70');
+content = content.replace(/text-slate-300/g, 'text-cyan-100');
+content = content.replace(/text-slate-200/g, 'text-white');
+content = content.replace(/text-slate-500/g, 'text-cyan-500/50');
+fs.writeFileSync('src/App.tsx', content);
