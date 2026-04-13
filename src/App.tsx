@@ -43,7 +43,12 @@ import {
   Info,
   PieChart,
   Clock,
-  MoreHorizontal
+  MoreHorizontal,
+  ClipboardCheck,
+  CheckCircle,
+  XCircle,
+  UploadCloud,
+  ChevronLeft
 } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
@@ -142,13 +147,14 @@ const MOCK_TASKS = [
 // --- Components ---
 
 const GlassPanel = ({ children, className = '' }: { children: React.ReactNode, className?: string }) => (
-  <div className={`bg-[#051024]/80 backdrop-blur-md border border-[#1e3a8a]/60 shadow-[inset_0_0_20px_rgba(30,58,138,0.2)] relative overflow-hidden ${className}`}>
+  <div className={`bg-[#0a1526]/40 backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] relative overflow-hidden rounded-xl ${className}`}>
+    {/* Subtle top highlight for glass effect */}
+    <div className="absolute inset-0 rounded-xl border border-white/5 pointer-events-none" style={{ maskImage: 'linear-gradient(to bottom, white, transparent)', WebkitMaskImage: '-webkit-linear-gradient(top, white, transparent)' }}></div>
     {/* Tech Corners */}
-    <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-cyan-500/80 pointer-events-none z-20"></div>
-    <div className="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-cyan-500/80 pointer-events-none z-20"></div>
-    <div className="absolute bottom-0 left-0 w-2 h-2 border-b-2 border-l-2 border-cyan-500/80 pointer-events-none z-20"></div>
-    <div className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-cyan-500/80 pointer-events-none z-20"></div>
-    <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent pointer-events-none z-0"></div>
+    <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-cyan-400/50 rounded-tl-xl pointer-events-none z-20"></div>
+    <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-cyan-400/50 rounded-tr-xl pointer-events-none z-20"></div>
+    <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-cyan-400/50 rounded-bl-xl pointer-events-none z-20"></div>
+    <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-cyan-400/50 rounded-br-xl pointer-events-none z-20"></div>
     <div className="relative z-10 h-full flex flex-col">{children}</div>
   </div>
 );
@@ -168,7 +174,7 @@ const StatCard = ({ icon: Icon, label, value, unit = '', valueColor = 'text-whit
   <div className="flex items-center gap-4">
     <div className="w-16 h-16 relative flex items-center justify-center shrink-0">
       <div className="absolute inset-0 bg-cyan-500/20 rotate-45 rounded-lg border border-cyan-500/30"></div>
-      <div className="absolute inset-2 bg-[#051024] rotate-45 rounded border border-cyan-500/50"></div>
+      <div className="absolute inset-2 bg-[#0a1526]/40 backdrop-blur-2xl rotate-45 rounded border border-cyan-500/50"></div>
       <Icon className="w-6 h-6 text-cyan-400 relative z-10" />
     </div>
     <div>
@@ -208,8 +214,8 @@ const HomeDashboardView = () => (
           <PanelTitle title="告警事件趋势" />
           <div className="flex items-center gap-2">
             <button className="px-3 py-1 bg-cyan-500/20 text-cyan-400 border border-cyan-500/50 rounded text-xs">7天</button>
-            <button className="px-3 py-1 bg-[#0a1c3a] text-cyan-400/70 border border-[#1e3a8a]/60 rounded text-xs hover:text-white">15天</button>
-            <button className="px-3 py-1 bg-[#0a1c3a] text-cyan-400/70 border border-[#1e3a8a]/60 rounded text-xs hover:text-white">30天</button>
+            <button className="px-3 py-1 bg-[#0a1c3a] text-cyan-400/70 border border-white/10 rounded text-xs hover:text-white">15天</button>
+            <button className="px-3 py-1 bg-[#0a1c3a] text-cyan-400/70 border border-white/10 rounded text-xs hover:text-white">30天</button>
           </div>
         </div>
         <div className="flex-1 w-full min-h-0">
@@ -277,7 +283,7 @@ const HomeDashboardView = () => (
         <PanelTitle title="视频广场" />
         
         <div className="grid grid-cols-3 gap-4 mb-8">
-          <div className="bg-[#051024]/80 border border-[#1e3a8a]/60 rounded-lg p-4 flex flex-col items-center justify-center relative overflow-hidden">
+          <div className="bg-[#0a1526]/40 backdrop-blur-2xl border border-white/10 rounded-lg p-4 flex flex-col items-center justify-center relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-50"></div>
             <div className="flex items-center gap-2 text-cyan-400/70 text-sm mb-2">
               <div className="w-2 h-2 bg-cyan-500 rotate-45"></div>
@@ -285,7 +291,7 @@ const HomeDashboardView = () => (
             </div>
             <div className="text-3xl font-mono text-cyan-400 font-bold">63</div>
           </div>
-          <div className="bg-[#051024]/80 border border-[#1e3a8a]/60 rounded-lg p-4 flex flex-col items-center justify-center relative overflow-hidden">
+          <div className="bg-[#0a1526]/40 backdrop-blur-2xl border border-white/10 rounded-lg p-4 flex flex-col items-center justify-center relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-50"></div>
             <div className="flex items-center gap-2 text-cyan-400/70 text-sm mb-2">
               <div className="w-2 h-2 bg-cyan-500 rotate-45"></div>
@@ -293,7 +299,7 @@ const HomeDashboardView = () => (
             </div>
             <div className="text-3xl font-mono text-cyan-400 font-bold">40</div>
           </div>
-          <div className="bg-[#051024]/80 border border-[#1e3a8a]/60 rounded-lg p-4 flex flex-col items-center justify-center relative overflow-hidden">
+          <div className="bg-[#0a1526]/40 backdrop-blur-2xl border border-white/10 rounded-lg p-4 flex flex-col items-center justify-center relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-50"></div>
             <div className="flex items-center gap-2 text-cyan-400/70 text-sm mb-2">
               <div className="w-2 h-2 bg-cyan-500 rotate-45"></div>
@@ -307,15 +313,15 @@ const HomeDashboardView = () => (
         <div className="flex-1 overflow-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-[#0a1c3a]/90 text-xs text-cyan-400 sticky top-0 backdrop-blur-md z-10 border-b border-[#1e3a8a]/60">
+              <tr className="bg-white/5 backdrop-blur-md text-xs text-cyan-400 sticky top-0 z-10 border-b border-white/10">
                 <th className="p-3 font-medium w-1/4">算法包名称</th>
                 <th className="p-3 font-medium w-24 text-center">设备数量</th>
                 <th className="p-3 font-medium">设备名称列表</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#1e3a8a]/40 text-xs text-cyan-100">
+            <tbody className="divide-y divide-white/5 text-xs text-cyan-100">
               {MOCK_TOP_DEVICES.map((item, idx) => (
-                <tr key={idx} className="hover:bg-[#0f2546]/60 transition-colors">
+                <tr key={idx} className="hover:bg-white/5 transition-colors">
                   <td className="p-3 text-cyan-100">{item.name}</td>
                   <td className="p-3 text-center font-mono">{item.count}</td>
                   <td className="p-3 text-cyan-400/70 truncate max-w-[200px]" title={item.devices}>{item.devices}</td>
@@ -331,7 +337,7 @@ const HomeDashboardView = () => (
 
 const Badge = ({ children, variant = 'default' }: { children: React.ReactNode, variant?: 'default' | 'danger' | 'success' | 'warning' }) => {
   const colors = {
-    default: 'bg-[#0a1c3a] text-cyan-100 border-[#1e3a8a]/60',
+    default: 'bg-[#0a1c3a] text-cyan-100 border-white/10',
     danger: 'bg-rose-500/20 text-rose-400 border-rose-500/30',
     success: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
     warning: 'bg-amber-500/20 text-amber-400 border-amber-500/30',
@@ -352,13 +358,13 @@ const VideoMonitoringView = () => (
   >
     {/* Sidebar */}
     <GlassPanel className="w-72 flex flex-col overflow-hidden shrink-0">
-      <div className="p-4 border-b border-[#1e3a8a]/60/50">
+      <div className="p-4 border-b border-white/10">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan-400/70" />
           <input 
             type="text" 
             placeholder="搜索设备..." 
-            className="w-full bg-[#030914]/60 border border-[#1e3a8a]/60 rounded-lg pl-9 pr-4 py-2 text-sm text-white focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 transition-all"
+            className="w-full bg-black/20 backdrop-blur-md border border-white/10 rounded-lg pl-9 pr-4 py-2 text-sm text-white focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 transition-all"
           />
         </div>
       </div>
@@ -406,13 +412,13 @@ const VideoMonitoringView = () => (
                   <h3 className="text-sm font-medium text-white drop-shadow-md">{cam.name}</h3>
                   <p className="text-xs text-cyan-100 drop-shadow-md">{cam.location}</p>
                 </div>
-                <button className="p-1.5 bg-[#051024]/80 hover:bg-cyan-500/20 text-white rounded-md backdrop-blur-md transition-colors border border-white/10">
+                <button className="p-1.5 bg-[#0a1526]/40 backdrop-blur-2xl hover:bg-cyan-500/20 text-white rounded-md backdrop-blur-md transition-colors border border-white/10">
                   <Settings className="w-4 h-4" />
                 </button>
               </div>
             </>
           ) : (
-            <div className="w-full h-full flex flex-col items-center justify-center text-[#1e3a8a] bg-[#030914]/30">
+            <div className="w-full h-full flex flex-col items-center justify-center text-[#1e3a8a] bg-transparent/30">
               <Video className="w-8 h-8 mb-2 opacity-50" />
               <span className="text-xs">无视频信号</span>
             </div>
@@ -423,23 +429,208 @@ const VideoMonitoringView = () => (
   </motion.div>
 );
 
+
+const EventReviewView = () => (
+  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="h-full flex flex-col gap-6">
+    {/* Header & Filters */}
+    <GlassPanel className="p-4 flex flex-col gap-4 shrink-0">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4 flex-wrap">
+          {/* 事件搜索 */}
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-cyan-100 whitespace-nowrap">事件搜索</span>
+            <div className="relative w-48">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan-400/70" />
+              <input type="text" placeholder="搜索待审核事件..." className="w-full bg-black/20 backdrop-blur-md border border-white/10 rounded pl-9 pr-3 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50" />
+            </div>
+          </div>
+
+          {/* 前端设备 (多选) */}
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-cyan-100 whitespace-nowrap">前端设备</span>
+            <div className="relative w-48">
+              <div className="w-full bg-black/20 backdrop-blur-md border border-white/10 rounded pl-3 pr-8 py-1.5 text-sm text-white/70 flex items-center justify-between cursor-pointer hover:border-cyan-500/50 transition-colors">
+                <span className="truncate">请选择设备 (支持多选)</span>
+                <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan-400/70 pointer-events-none" />
+              </div>
+            </div>
+          </div>
+
+          {/* 算法类型 */}
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-cyan-100 whitespace-nowrap">算法类型</span>
+            <div className="relative w-48">
+              <select className="appearance-none w-full bg-black/20 backdrop-blur-md border border-white/10 rounded pl-3 pr-8 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50 cursor-pointer">
+                <option value="">全部算法</option>
+                <option value="helmet">安全帽检测</option>
+                <option value="fire">烟火检测</option>
+              </select>
+              <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan-400/70 pointer-events-none" />
+            </div>
+          </div>
+        </div>
+        
+        <div className="flex items-center gap-4">
+          <div className="text-sm text-cyan-400/70 whitespace-nowrap">
+            待审核 <span className="text-amber-400 font-bold">24</span> 个事件
+          </div>
+          <button className="flex items-center gap-2 px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-white text-sm font-medium rounded-lg transition-colors shadow-[0_0_15px_rgba(8,145,178,0.4)]">
+            <Plus className="w-4 h-4" />
+            手动创建事件
+          </button>
+        </div>
+      </div>
+
+      {/* 时间范围 */}
+      <div className="flex items-center gap-4 flex-wrap">
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-cyan-100 whitespace-nowrap">预警时间</span>
+          <div className="flex items-center gap-2">
+            <input type="datetime-local" step="1" className="bg-black/20 backdrop-blur-md border border-white/10 rounded px-3 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50 [color-scheme:dark]" />
+            <span className="text-cyan-400/70">-</span>
+            <input type="datetime-local" step="1" className="bg-black/20 backdrop-blur-md border border-white/10 rounded px-3 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50 [color-scheme:dark]" />
+          </div>
+        </div>
+        
+        {/* 快捷选项 */}
+        <div className="flex items-center gap-2">
+          {['最近2分钟', '最近1小时', '近1天', '近3天', '近7天'].map((timeOpt) => (
+            <button key={timeOpt} className="px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded text-xs text-cyan-100 transition-colors">
+              {timeOpt}
+            </button>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-2 ml-auto">
+          <button className="px-6 py-1.5 bg-cyan-600 hover:bg-cyan-500 text-white text-sm font-medium rounded transition-colors shadow-[0_0_15px_rgba(8,145,178,0.4)]">
+            搜索
+          </button>
+          <button className="px-6 py-1.5 bg-[#0a1c3a] hover:bg-[#1e3a8a]/80 text-white text-sm font-medium rounded transition-colors border border-white/10">
+            重置
+          </button>
+        </div>
+      </div>
+    </GlassPanel>
+
+    {/* Review Grid */}
+    <div className="flex-1 overflow-y-auto pr-2 pb-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {MOCK_PENDING_ALERTS.map((alert) => (
+          <GlassPanel key={alert.id} className="overflow-hidden group hover:border-cyan-500/50 transition-colors flex flex-col">
+            <div className="relative h-40 shrink-0">
+              <img src={alert.img} alt="Alert" className="w-full h-full object-cover" />
+              <div className="absolute top-1/4 left-1/2 w-16 h-24 border-2 border-amber-500"></div>
+              <div className="absolute top-2 right-2">
+                <Badge variant="warning">待审核</Badge>
+              </div>
+            </div>
+            <div className="p-4 flex-1 flex flex-col">
+              <h4 className="text-sm font-bold text-white mb-1 truncate" title={alert.taskId}>{alert.taskId}</h4>
+              <p className="text-xs text-cyan-400 mb-3">{alert.title}</p>
+              <div className="space-y-1.5 mb-4">
+                <div className="flex items-center gap-2 text-xs text-cyan-400/70">
+                  <MonitorPlay className="w-3.5 h-3.5 shrink-0" />
+                  <span className="truncate">{alert.location}</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs text-cyan-400/70">
+                  <Activity className="w-3.5 h-3.5 shrink-0" />
+                  <span>{alert.time}</span>
+                </div>
+              </div>
+              
+              {/* Actions */}
+              <div className="mt-auto grid grid-cols-2 gap-2 pt-3 border-t border-white/5">
+                <button className="flex items-center justify-center gap-1.5 py-1.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 text-xs font-medium rounded border border-emerald-500/20 transition-colors">
+                  <CheckCircle className="w-3.5 h-3.5" />
+                  正确 (推送)
+                </button>
+                <button className="flex items-center justify-center gap-1.5 py-1.5 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 text-xs font-medium rounded border border-rose-500/20 transition-colors">
+                  <XCircle className="w-3.5 h-3.5" />
+                  错误 (忽略)
+                </button>
+              </div>
+            </div>
+          </GlassPanel>
+        ))}
+      </div>
+    </div>
+  </motion.div>
+);
+
 const EventCenterView = () => (
   <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="h-full flex flex-col gap-6">
     {/* Filters */}
-    <GlassPanel className="p-4 flex items-center justify-between shrink-0">
-      <div className="flex items-center gap-4">
-        <div className="relative w-64">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan-400/70" />
-          <input type="text" placeholder="输入任务名称搜索..." className="w-full bg-[#030914]/60 border border-[#1e3a8a]/60 rounded-lg pl-9 pr-4 py-2 text-sm text-white focus:outline-none focus:border-cyan-500/50" />
+    <GlassPanel className="p-4 flex flex-col gap-4 shrink-0">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4 flex-wrap">
+          {/* 任务名称 */}
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-cyan-100 whitespace-nowrap">任务名称</span>
+            <div className="relative w-48">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan-400/70" />
+              <input type="text" placeholder="输入任务名称" className="w-full bg-black/20 backdrop-blur-md border border-white/10 rounded pl-9 pr-3 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50" />
+            </div>
+          </div>
+
+          {/* 前端设备 (多选) */}
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-cyan-100 whitespace-nowrap">前端设备</span>
+            <div className="relative w-48">
+              <div className="w-full bg-black/20 backdrop-blur-md border border-white/10 rounded pl-3 pr-8 py-1.5 text-sm text-white/70 flex items-center justify-between cursor-pointer hover:border-cyan-500/50 transition-colors">
+                <span className="truncate">请选择设备 (支持多选)</span>
+                <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan-400/70 pointer-events-none" />
+              </div>
+            </div>
+          </div>
+
+          {/* 任务需求 */}
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-cyan-100 whitespace-nowrap">任务需求</span>
+            <div className="relative w-48">
+              <select className="appearance-none w-full bg-black/20 backdrop-blur-md border border-white/10 rounded pl-3 pr-8 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50 cursor-pointer">
+                <option value="">请选择任务需求</option>
+                <option value="all">全量下发任务</option>
+                <option value="1">需求 A</option>
+                <option value="2">需求 B</option>
+              </select>
+              <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan-400/70 pointer-events-none" />
+            </div>
+          </div>
         </div>
-        <div className="h-6 w-px bg-[#1e3a8a]"></div>
-        <button className="flex items-center gap-2 px-4 py-2 bg-[#0a1c3a] hover:bg-[#1e3a8a]/80 text-sm text-white rounded-lg transition-colors border border-[#1e3a8a]/60">
-          <Filter className="w-4 h-4" />
-          <span>更多筛选</span>
-        </button>
+        
+        <div className="text-sm text-cyan-400/70 whitespace-nowrap">
+          共发现 <span className="text-cyan-400 font-bold">1,886</span> 个预警
+        </div>
       </div>
-      <div className="text-sm text-cyan-400/70">
-        共发现 <span className="text-cyan-400 font-bold">1,886</span> 个预警
+
+      {/* 时间范围 */}
+      <div className="flex items-center gap-4 flex-wrap">
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-cyan-100 whitespace-nowrap">预警时间</span>
+          <div className="flex items-center gap-2">
+            <input type="datetime-local" step="1" className="bg-black/20 backdrop-blur-md border border-white/10 rounded px-3 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50 [color-scheme:dark]" />
+            <span className="text-cyan-400/70">-</span>
+            <input type="datetime-local" step="1" className="bg-black/20 backdrop-blur-md border border-white/10 rounded px-3 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50 [color-scheme:dark]" />
+          </div>
+        </div>
+        
+        {/* 快捷选项 */}
+        <div className="flex items-center gap-2">
+          {['最近2分钟', '最近1小时', '近1天', '近3天', '近7天'].map((timeOpt) => (
+            <button key={timeOpt} className="px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded text-xs text-cyan-100 transition-colors">
+              {timeOpt}
+            </button>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-2 ml-auto">
+          <button className="px-6 py-1.5 bg-cyan-600 hover:bg-cyan-500 text-white text-sm font-medium rounded transition-colors shadow-[0_0_15px_rgba(8,145,178,0.4)]">
+            搜索
+          </button>
+          <button className="px-6 py-1.5 bg-[#0a1c3a] hover:bg-[#1e3a8a]/80 text-white text-sm font-medium rounded transition-colors border border-white/10">
+            重置
+          </button>
+        </div>
       </div>
     </GlassPanel>
 
@@ -478,19 +669,245 @@ const EventCenterView = () => (
   </motion.div>
 );
 
-const AlgorithmManagementView = () => (
+
+const AlgorithmCreationView = ({ onBack }: { onBack: () => void }) => {
+  const [activeTab, setActiveTab] = useState<'classification' | 'detection'>('classification');
+  
+  return (
+    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="h-full flex flex-col gap-4">
+      {/* Top Tabs & Back */}
+      <div className="flex items-center justify-between shrink-0">
+        <div className="flex items-center gap-4">
+          <button onClick={onBack} className="p-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg transition-colors text-cyan-400/70 hover:text-cyan-400">
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <div className="flex items-center bg-black/20 backdrop-blur-md border border-white/10 rounded-lg p-1">
+            <button 
+              onClick={() => setActiveTab('classification')}
+              className={`px-6 py-1.5 rounded-md text-sm font-medium transition-colors ${activeTab === 'classification' ? 'bg-cyan-600 text-white shadow-[0_0_10px_rgba(8,145,178,0.4)]' : 'text-cyan-400/70 hover:text-white'}`}
+            >
+              分类算法
+            </button>
+            <button 
+              onClick={() => setActiveTab('detection')}
+              className={`px-6 py-1.5 rounded-md text-sm font-medium transition-colors ${activeTab === 'detection' ? 'bg-cyan-600 text-white shadow-[0_0_10px_rgba(8,145,178,0.4)]' : 'text-cyan-400/70 hover:text-white'}`}
+            >
+              检测算法
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex-1 flex gap-4 min-h-0">
+        {/* Left Panel */}
+        <GlassPanel className="w-[400px] flex flex-col shrink-0">
+          <div className="p-4 border-b border-white/10 flex items-center gap-2 shrink-0">
+            <div className="text-amber-500 flex -space-x-1">
+              <ChevronRight className="w-4 h-4" /><ChevronRight className="w-4 h-4" /><ChevronRight className="w-4 h-4" />
+            </div>
+            <span className="font-bold text-white">上传信息</span>
+          </div>
+          <div className="flex-1 overflow-y-auto p-4 space-y-6">
+            {/* 正例标签 */}
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 text-sm text-cyan-400 bg-cyan-900/20 px-2 py-1 rounded">
+                <ChevronRight className="w-4 h-4" /> 正例标签
+              </div>
+              <div className="flex flex-wrap gap-2 pl-2">
+                <div className="flex items-center gap-1 px-3 py-1 bg-[#0a1c3a] border border-cyan-500/50 rounded text-xs text-cyan-100">
+                  持刀持械 <X className="w-3 h-3 cursor-pointer hover:text-rose-400 ml-1" />
+                </div>
+                <button className="flex items-center gap-1 px-3 py-1 bg-transparent border border-white/20 border-dashed rounded text-xs text-cyan-400/70 hover:text-cyan-400 hover:border-cyan-400/50 transition-colors">
+                  <Plus className="w-3 h-3" /> 添加标签
+                </button>
+              </div>
+            </div>
+
+            {/* 负例标签 */}
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 text-sm text-cyan-400 bg-cyan-900/20 px-2 py-1 rounded">
+                <ChevronRight className="w-4 h-4" /> 负例标签
+              </div>
+              <div className="flex flex-wrap gap-2 pl-2">
+                <div className="flex items-center gap-1 px-3 py-1 bg-[#0a1c3a] border border-cyan-500/50 rounded text-xs text-cyan-100">
+                  非持刀持械 <X className="w-3 h-3 cursor-pointer hover:text-rose-400 ml-1" />
+                </div>
+                <button className="flex items-center gap-1 px-3 py-1 bg-transparent border border-white/20 border-dashed rounded text-xs text-cyan-400/70 hover:text-cyan-400 hover:border-cyan-400/50 transition-colors">
+                  <Plus className="w-3 h-3" /> 添加标签
+                </button>
+              </div>
+            </div>
+
+            {/* 阈值设置 */}
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 text-sm text-cyan-400 bg-cyan-900/20 px-2 py-1 rounded">
+                <ChevronRight className="w-4 h-4" /> 阈值设置
+              </div>
+              <div className="flex items-center gap-4 pl-2">
+                <div className="flex items-center bg-black/20 border border-white/10 rounded">
+                  <button className="px-2 py-1 text-cyan-400/70 hover:text-cyan-400 border-r border-white/10 hover:bg-white/5">-</button>
+                  <input type="text" value="0.15" readOnly className="w-16 bg-transparent text-center text-sm text-white focus:outline-none" />
+                  <button className="px-2 py-1 text-cyan-400/70 hover:text-cyan-400 border-l border-white/10 hover:bg-white/5">+</button>
+                </div>
+                <span className="text-xs text-cyan-400/50">范围: 0.00-1.00</span>
+              </div>
+            </div>
+
+            {/* 选择图片 */}
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 text-sm text-cyan-400 bg-cyan-900/20 px-2 py-1 rounded">
+                <ChevronRight className="w-4 h-4" /> 选择图片
+              </div>
+              <div className="pl-2 space-y-4">
+                <div className="border border-dashed border-white/20 rounded-lg p-6 flex flex-col items-center justify-center gap-2 hover:border-cyan-500/50 transition-colors cursor-pointer bg-white/5">
+                  <UploadCloud className="w-8 h-8 text-cyan-400/70" />
+                  <div className="text-sm text-white">将文件拖到此处，或 <span className="text-cyan-400">点击上传</span></div>
+                  <div className="text-xs text-cyan-400/50 text-center">支持格式：JPG、JPEG、PNG、BMP<br/>单张图片大小不超过10MB，最多上传20张图片</div>
+                </div>
+                
+                {/* Thumbnails */}
+                <div className="flex gap-2 overflow-x-auto pb-2">
+                  <div className="relative w-24 h-16 rounded border border-white/10 shrink-0 group">
+                    <img src="https://picsum.photos/seed/knife1/100/100" className="w-full h-full object-cover rounded" />
+                    <button className="absolute -top-2 -right-2 w-4 h-4 bg-rose-500 rounded-full text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10"><X className="w-3 h-3"/></button>
+                    <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-[10px] text-white px-1 truncate rounded-b">7.png</div>
+                  </div>
+                  <div className="relative w-24 h-16 rounded border-2 border-cyan-500 shrink-0 group">
+                    <div className="absolute top-0 left-0 bg-cyan-500 text-white text-[10px] px-1 z-10">已选择</div>
+                    <img src="https://picsum.photos/seed/knife2/100/100" className="w-full h-full object-cover rounded" />
+                    <button className="absolute -top-2 -right-2 w-4 h-4 bg-rose-500 rounded-full text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10"><X className="w-3 h-3"/></button>
+                    <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-[10px] text-white px-1 truncate rounded-b">132.png</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Bounding Box Area */}
+            <div className="mt-4 border border-white/10 rounded-lg overflow-hidden flex flex-col">
+              <div className="bg-[#0a1c3a]/50 p-2 flex items-center justify-between border-b border-white/10">
+                <span className="text-xs text-cyan-100">为选中图片绘制边界框：132.png</span>
+                <div className="flex gap-2">
+                  <button className="px-2 py-1 bg-rose-500/20 text-rose-400 hover:bg-rose-500/30 rounded text-xs transition-colors">清除所有</button>
+                  <button className="px-2 py-1 bg-cyan-600/20 text-cyan-400 hover:bg-cyan-600/30 rounded text-xs transition-colors">撤销</button>
+                </div>
+              </div>
+              <div className="h-48 bg-black/40 relative flex items-center justify-center overflow-hidden">
+                <img src="https://picsum.photos/seed/knife2/400/300" className="max-w-full max-h-full object-contain" />
+                {/* Mock bounding box */}
+                <div className="absolute top-1/4 left-1/3 w-1/4 h-1/2 border-2 border-cyan-400 bg-cyan-400/10"></div>
+              </div>
+            </div>
+          </div>
+        </GlassPanel>
+
+        {/* Right Panel */}
+        <GlassPanel className="flex-1 flex flex-col min-w-0">
+          <div className="p-4 border-b border-white/10 flex items-center justify-between shrink-0">
+            <div className="flex items-center gap-2">
+              <div className="text-amber-500 flex -space-x-1">
+                <ChevronRight className="w-4 h-4" /><ChevronRight className="w-4 h-4" /><ChevronRight className="w-4 h-4" />
+              </div>
+              <span className="font-bold text-white">检验结果</span>
+            </div>
+            <button className="px-4 py-1.5 bg-cyan-600 hover:bg-cyan-500 text-white text-sm font-medium rounded transition-colors shadow-[0_0_15px_rgba(8,145,178,0.4)]">
+              生成算法包
+            </button>
+          </div>
+          
+          <div className="flex-1 overflow-auto p-4">
+            <table className="w-full text-left border-collapse border border-white/10">
+              <thead>
+                <tr className="bg-white/5 backdrop-blur-md text-xs text-cyan-400 sticky top-0 z-10 border-b border-white/10">
+                  <th className="p-3 font-medium border-r border-white/10">图片</th>
+                  <th className="p-3 font-medium text-center border-r border-white/10">标签</th>
+                  <th className="p-3 font-medium text-center border-r border-white/10">类型</th>
+                  <th className="p-3 font-medium text-center border-r border-white/10">得分</th>
+                  <th className="p-3 font-medium">告警信息</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/5 text-sm text-cyan-100">
+                {[
+                  { id: 'A', img: '7.png', src: 'https://picsum.photos/seed/knife1/100/100', scorePos: 0.32, scoreNeg: 0.32, alert: true },
+                  { id: 'B', img: '7.png', src: 'https://picsum.photos/seed/knife1/100/100', scorePos: 0.30, scoreNeg: 0.30, alert: false },
+                  { id: 'A2', img: '132.png', src: 'https://picsum.photos/seed/knife2/100/100', scorePos: 0.29, scoreNeg: 0.29, alert: false },
+                ].map((row, idx) => (
+                  <tr key={idx} className="hover:bg-white/5 transition-colors">
+                    <td className="p-3 border-r border-white/10">
+                      <div className="flex items-center gap-3">
+                        <img src={row.src} className="w-12 h-12 object-cover rounded border border-white/10" />
+                        <div>
+                          <div className="text-white text-xs">{row.img}</div>
+                          <div className="text-cyan-400/50 text-[10px]">ID: {row.id}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="p-0 border-r border-white/10">
+                      <div className="flex flex-col h-full">
+                        <div className="flex-1 flex items-center justify-center p-2 border-b border-white/5">
+                          <div className="px-2 py-0.5 border border-cyan-500/50 rounded text-xs text-cyan-400 bg-cyan-900/20">持刀持械</div>
+                        </div>
+                        <div className="flex-1 flex items-center justify-center p-2">
+                          <div className="px-2 py-0.5 border border-white/20 rounded text-xs text-cyan-100/70 bg-white/5">非持刀持械</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="p-0 border-r border-white/10">
+                      <div className="flex flex-col h-full text-xs text-center">
+                        <div className="flex-1 flex items-center justify-center p-2 border-b border-white/5">正例</div>
+                        <div className="flex-1 flex items-center justify-center p-2">负例</div>
+                      </div>
+                    </td>
+                    <td className="p-0 border-r border-white/10">
+                      <div className="flex flex-col h-full text-xs text-center">
+                        <div className="flex-1 flex flex-col items-center justify-center p-2 border-b border-white/5">
+                          <span className="text-emerald-400 font-medium">{row.scorePos.toFixed(2)}</span>
+                          <span className="text-[10px] text-cyan-400/50 bg-white/5 px-1 rounded mt-0.5">阈值: 0.15</span>
+                        </div>
+                        <div className="flex-1 flex flex-col items-center justify-center p-2">
+                          <span className="text-emerald-400 font-medium">{row.scoreNeg.toFixed(2)}</span>
+                          <span className="text-[10px] text-cyan-400/50 bg-white/5 px-1 rounded mt-0.5">阈值: 0.15</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="p-3 text-xs">
+                      {row.alert && (
+                        <div className="text-rose-400 flex flex-col gap-1">
+                          <span className="font-bold">告警</span>
+                          <span className="text-cyan-100/70">正例标签最高分数0.316超过阈值0.15，且大于负例标签最高分数0.315</span>
+                        </div>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </GlassPanel>
+      </div>
+    </motion.div>
+  );
+};
+
+const AlgorithmManagementView = () => {
+  const [isAdding, setIsAdding] = useState(false);
+
+  if (isAdding) {
+    return <AlgorithmCreationView onBack={() => setIsAdding(false)} />;
+  }
+
+  return (
   <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="h-full flex flex-col gap-6">
     {/* Top Filter Bar */}
     <GlassPanel className="p-4 shrink-0">
       <div className="flex items-center gap-6">
         <div className="flex items-center gap-2">
           <span className="text-sm text-cyan-100 whitespace-nowrap">模型名称</span>
-          <input type="text" placeholder="请输入模型名称" className="w-48 bg-[#030914]/60 border border-[#1e3a8a]/60 rounded pl-3 pr-3 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50" />
+          <input type="text" placeholder="请输入模型名称" className="w-48 bg-black/20 backdrop-blur-md border border-white/10 rounded pl-3 pr-3 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50" />
         </div>
         <div className="flex items-center gap-2">
           <span className="text-sm text-cyan-100 whitespace-nowrap">模型来源</span>
           <div className="relative w-32">
-            <select className="appearance-none w-full bg-[#030914]/60 border border-[#1e3a8a]/60 rounded pl-3 pr-8 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50 cursor-pointer">
+            <select className="appearance-none w-full bg-black/20 backdrop-blur-md border border-white/10 rounded pl-3 pr-8 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50 cursor-pointer">
               <option value="">全部</option>
             </select>
             <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan-400/70 pointer-events-none" />
@@ -499,7 +916,7 @@ const AlgorithmManagementView = () => (
         <div className="flex items-center gap-2">
           <span className="text-sm text-cyan-100 whitespace-nowrap">是否可训练</span>
           <div className="relative w-32">
-            <select className="appearance-none w-full bg-[#030914]/60 border border-[#1e3a8a]/60 rounded pl-3 pr-8 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50 cursor-pointer">
+            <select className="appearance-none w-full bg-black/20 backdrop-blur-md border border-white/10 rounded pl-3 pr-8 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50 cursor-pointer">
               <option value="">全部</option>
             </select>
             <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan-400/70 pointer-events-none" />
@@ -508,7 +925,7 @@ const AlgorithmManagementView = () => (
         <div className="flex items-center gap-2">
           <span className="text-sm text-cyan-100 whitespace-nowrap">训练状态</span>
           <div className="relative w-32">
-            <select className="appearance-none w-full bg-[#030914]/60 border border-[#1e3a8a]/60 rounded pl-3 pr-8 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50 cursor-pointer">
+            <select className="appearance-none w-full bg-black/20 backdrop-blur-md border border-white/10 rounded pl-3 pr-8 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50 cursor-pointer">
               <option value="">全部</option>
             </select>
             <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan-400/70 pointer-events-none" />
@@ -517,7 +934,7 @@ const AlgorithmManagementView = () => (
         <div className="flex items-center gap-2">
           <span className="text-sm text-cyan-100 whitespace-nowrap">是否锁定</span>
           <div className="relative w-32">
-            <select className="appearance-none w-full bg-[#030914]/60 border border-[#1e3a8a]/60 rounded pl-3 pr-8 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50 cursor-pointer">
+            <select className="appearance-none w-full bg-black/20 backdrop-blur-md border border-white/10 rounded pl-3 pr-8 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50 cursor-pointer">
               <option value="">全部</option>
             </select>
             <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan-400/70 pointer-events-none" />
@@ -527,7 +944,7 @@ const AlgorithmManagementView = () => (
           <button className="px-6 py-1.5 bg-cyan-600 hover:bg-cyan-500 text-white text-sm font-medium rounded transition-colors shadow-[0_0_15px_rgba(8,145,178,0.4)]">
             搜索
           </button>
-          <button className="px-6 py-1.5 bg-[#0a1c3a] hover:bg-[#1e3a8a]/80 text-white text-sm font-medium rounded transition-colors border border-[#1e3a8a]/60">
+          <button className="px-6 py-1.5 bg-[#0a1c3a] hover:bg-[#1e3a8a]/80 text-white text-sm font-medium rounded transition-colors border border-white/10">
             重置
           </button>
         </div>
@@ -537,7 +954,7 @@ const AlgorithmManagementView = () => (
     {/* Action Bar */}
     <div className="flex items-center justify-between shrink-0">
       <div className="flex items-center gap-4">
-        <button className="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-white text-sm font-medium rounded transition-colors shadow-[0_0_15px_rgba(8,145,178,0.4)]">
+        <button onClick={() => setIsAdding(true)} className="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-white text-sm font-medium rounded transition-colors shadow-[0_0_15px_rgba(8,145,178,0.4)]">
           添加模型
         </button>
         <span className="text-sm text-cyan-400/70">提示：自定义模型授权2000个，已使用757个，剩余1243个</span>
@@ -573,7 +990,7 @@ const AlgorithmManagementView = () => (
                 <span className="text-cyan-400/70 flex items-center gap-1"><Info className="w-3 h-3"/> 模型来源</span>
                 <span className="text-cyan-400 font-medium">{algo.source}</span>
               </div>
-              <div className="flex flex-col gap-1 items-center border-l border-r border-[#1e3a8a]/40">
+              <div className="flex flex-col gap-1 items-center border-l border-r border-white/5">
                 <span className="text-cyan-400/70 flex items-center gap-1"><PieChart className="w-3 h-3"/> 训练数据</span>
                 <div className="flex items-center gap-2 font-medium">
                   <span className="text-amber-400">正: {algo.dataPos}</span>
@@ -586,7 +1003,7 @@ const AlgorithmManagementView = () => (
               </div>
             </div>
 
-            <div className="flex items-center justify-between pt-3 border-t border-[#1e3a8a]/40 mt-auto">
+            <div className="flex items-center justify-between pt-3 border-t border-white/5 mt-auto">
               <div className="flex items-center gap-1.5 text-xs text-cyan-400/70">
                 <Clock className="w-3.5 h-3.5" />
                 {algo.time}
@@ -613,13 +1030,13 @@ const SystemManagementView = () => (
           <UserPlus className="w-4 h-4" />
           新增用户
         </button>
-        <button className="flex items-center gap-2 px-4 py-2 bg-[#0a1c3a] hover:bg-[#1e3a8a]/80 text-sm text-white rounded-lg transition-colors border border-[#1e3a8a]/60">
+        <button className="flex items-center gap-2 px-4 py-2 bg-[#0a1c3a] hover:bg-[#1e3a8a]/80 text-sm text-white rounded-lg transition-colors border border-white/10">
           批量导入
         </button>
       </div>
       <div className="relative w-64">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan-400/70" />
-        <input type="text" placeholder="搜索用户名/姓名..." className="w-full bg-[#030914]/60 border border-[#1e3a8a]/60 rounded-lg pl-9 pr-4 py-2 text-sm text-white focus:outline-none focus:border-cyan-500/50" />
+        <input type="text" placeholder="搜索用户名/姓名..." className="w-full bg-black/20 backdrop-blur-md border border-white/10 rounded-lg pl-9 pr-4 py-2 text-sm text-white focus:outline-none focus:border-cyan-500/50" />
       </div>
     </GlassPanel>
 
@@ -628,7 +1045,7 @@ const SystemManagementView = () => (
       <div className="flex-1 overflow-auto">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-[#0a1c3a]/90 text-xs text-cyan-400 uppercase tracking-wider sticky top-0 backdrop-blur-md z-10 border-b border-[#1e3a8a]/60">
+            <tr className="bg-white/5 backdrop-blur-md text-xs text-cyan-400 uppercase tracking-wider sticky top-0 z-10 border-b border-white/10">
               <th className="p-4 font-medium">用户名</th>
               <th className="p-4 font-medium">姓名</th>
               <th className="p-4 font-medium">角色</th>
@@ -638,9 +1055,9 @@ const SystemManagementView = () => (
               <th className="p-4 font-medium text-right">操作</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#1e3a8a]/40 text-sm text-cyan-100">
+          <tbody className="divide-y divide-white/5 text-sm text-cyan-100">
             {MOCK_USERS.map((user) => (
-              <tr key={user.id} className="hover:bg-[#0f2546]/60 transition-colors group">
+              <tr key={user.id} className="hover:bg-white/5 transition-colors group">
                 <td className="p-4 font-medium text-white">{user.username}</td>
                 <td className="p-4">{user.name}</td>
                 <td className="p-4">
@@ -668,7 +1085,8 @@ const SystemManagementView = () => (
       </div>
     </GlassPanel>
   </motion.div>
-);
+  );
+};
 
 const DeviceManagementView = () => (
   <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="h-full flex gap-6">
@@ -698,16 +1116,16 @@ const DeviceManagementView = () => (
         <div className="grid grid-cols-4 gap-4">
           <div className="flex items-center gap-2">
             <span className="text-sm text-cyan-400/70 whitespace-nowrap">主要设备名称</span>
-            <input type="text" placeholder="请输入主设备名" className="w-full bg-[#030914]/60 border border-[#1e3a8a]/60 rounded pl-3 pr-3 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50" />
+            <input type="text" placeholder="请输入主设备名" className="w-full bg-black/20 backdrop-blur-md border border-white/10 rounded pl-3 pr-3 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50" />
           </div>
           <div className="flex items-center gap-2">
             <span className="text-sm text-cyan-400/70 whitespace-nowrap">主设备ID</span>
-            <input type="text" placeholder="请输入主设备ID" className="w-full bg-[#030914]/60 border border-[#1e3a8a]/60 rounded pl-3 pr-3 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50" />
+            <input type="text" placeholder="请输入主设备ID" className="w-full bg-black/20 backdrop-blur-md border border-white/10 rounded pl-3 pr-3 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50" />
           </div>
           <div className="flex items-center gap-2">
             <span className="text-sm text-cyan-400/70 whitespace-nowrap">状态</span>
             <div className="relative w-full">
-              <select className="appearance-none w-full bg-[#030914]/60 border border-[#1e3a8a]/60 rounded pl-3 pr-8 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50 cursor-pointer">
+              <select className="appearance-none w-full bg-black/20 backdrop-blur-md border border-white/10 rounded pl-3 pr-8 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50 cursor-pointer">
                 <option value="">全部</option>
                 <option value="online">在线</option>
                 <option value="offline">离线</option>
@@ -717,27 +1135,27 @@ const DeviceManagementView = () => (
           </div>
           <div className="flex items-center gap-2">
             <span className="text-sm text-cyan-400/70 whitespace-nowrap">前端IP地址</span>
-            <input type="text" placeholder="请输入前端IP地" className="w-full bg-[#030914]/60 border border-[#1e3a8a]/60 rounded pl-3 pr-3 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50" />
+            <input type="text" placeholder="请输入前端IP地" className="w-full bg-black/20 backdrop-blur-md border border-white/10 rounded pl-3 pr-3 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50" />
           </div>
           <div className="flex items-center gap-2">
             <span className="text-sm text-cyan-400/70 whitespace-nowrap">平台设备ID</span>
-            <input type="text" placeholder="请输入平台设备" className="w-full bg-[#030914]/60 border border-[#1e3a8a]/60 rounded pl-3 pr-3 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50" />
+            <input type="text" placeholder="请输入平台设备" className="w-full bg-black/20 backdrop-blur-md border border-white/10 rounded pl-3 pr-3 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50" />
           </div>
           <div className="col-span-3 flex justify-end gap-2">
             <button className="px-6 py-1.5 bg-cyan-600 hover:bg-cyan-500 text-white text-sm font-medium rounded transition-colors shadow-[0_0_10px_rgba(8,145,178,0.4)]">
               搜索
             </button>
-            <button className="px-6 py-1.5 bg-[#0a1c3a] hover:bg-[#1e3a8a]/80 text-white text-sm font-medium rounded transition-colors border border-[#1e3a8a]/60">
+            <button className="px-6 py-1.5 bg-[#0a1c3a] hover:bg-[#1e3a8a]/80 text-white text-sm font-medium rounded transition-colors border border-white/10">
               重置
             </button>
           </div>
         </div>
 
-        <div className="flex items-center gap-3 pt-2 border-t border-[#1e3a8a]/60/50">
+        <div className="flex items-center gap-3 pt-2 border-t border-white/10">
           <button className="px-4 py-1.5 bg-cyan-600 hover:bg-cyan-500 text-white text-sm font-medium rounded transition-colors shadow-[0_0_10px_rgba(8,145,178,0.4)]">
             添加主设备
           </button>
-          <button className="px-4 py-1.5 bg-[#0a1c3a] hover:bg-[#1e3a8a]/80 text-white text-sm font-medium rounded transition-colors border border-[#1e3a8a]/60">
+          <button className="px-4 py-1.5 bg-[#0a1c3a] hover:bg-[#1e3a8a]/80 text-white text-sm font-medium rounded transition-colors border border-white/10">
             批量删除
           </button>
           <span className="text-xs text-cyan-400/70 ml-2">提示：设备接入授权路数为1000路，已使用367路，剩余633路</span>
@@ -749,8 +1167,8 @@ const DeviceManagementView = () => (
         <div className="flex-1 overflow-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-[#0a1c3a]/90 text-xs text-cyan-400 font-medium sticky top-0 backdrop-blur-md z-10 border-b border-[#1e3a8a]/60">
-                <th className="p-3 w-12 text-center"><input type="checkbox" className="rounded border-[#1e3a8a]/60 bg-[#051024]/80" /></th>
+              <tr className="bg-white/5 backdrop-blur-md text-xs text-cyan-400 font-medium sticky top-0 z-10 border-b border-white/10">
+                <th className="p-3 w-12 text-center"><input type="checkbox" className="rounded border-white/10 bg-[#0a1526]/40 backdrop-blur-2xl" /></th>
                 <th className="p-3">序号</th>
                 <th className="p-3">主设备ID</th>
                 <th className="p-3">平台设备ID</th>
@@ -762,10 +1180,10 @@ const DeviceManagementView = () => (
                 <th className="p-3 text-right pr-6">操作</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#1e3a8a]/40 text-sm text-cyan-100">
+            <tbody className="divide-y divide-white/5 text-sm text-cyan-100">
               {MOCK_DEVICE_LIST.map((device, idx) => (
-                <tr key={device.id} className="hover:bg-[#0f2546]/60 transition-colors">
-                  <td className="p-3 text-center"><input type="checkbox" className="rounded border-[#1e3a8a]/60 bg-[#051024]/80" /></td>
+                <tr key={device.id} className="hover:bg-white/5 transition-colors">
+                  <td className="p-3 text-center"><input type="checkbox" className="rounded border-white/10 bg-[#0a1526]/40 backdrop-blur-2xl" /></td>
                   <td className="p-3">{idx + 1}</td>
                   <td className="p-3 font-mono text-xs">{device.mainDeviceId}</td>
                   <td className="p-3 font-mono text-xs">{device.platformDeviceId}</td>
@@ -789,11 +1207,11 @@ const DeviceManagementView = () => (
           </table>
         </div>
         {/* Pagination Footer */}
-        <div className="p-3 border-t border-[#1e3a8a]/60/50 flex items-center justify-between bg-[#030914]/40">
+        <div className="p-3 border-t border-white/10 flex items-center justify-between bg-transparent/40">
           <span className="text-xs text-cyan-400/70">共 358 项数据</span>
           <div className="flex items-center gap-2 text-xs text-cyan-400/70">
             <div className="relative">
-              <select className="appearance-none bg-[#0a1c3a] border border-[#1e3a8a]/60 rounded pl-2 pr-6 py-1 text-cyan-100 focus:outline-none cursor-pointer">
+              <select className="appearance-none bg-[#0a1c3a] border border-white/10 rounded pl-2 pr-6 py-1 text-cyan-100 focus:outline-none cursor-pointer">
                 <option>10项/页</option>
                 <option>20项/页</option>
               </select>
@@ -813,7 +1231,7 @@ const DeviceManagementView = () => (
             </div>
             <div className="flex items-center gap-1 ml-2">
               <span>跳至</span>
-              <input type="text" defaultValue="1" className="w-8 h-6 bg-[#0a1c3a] border border-[#1e3a8a]/60 rounded text-center text-cyan-100 focus:outline-none" />
+              <input type="text" defaultValue="1" className="w-8 h-6 bg-[#0a1c3a] border border-white/10 rounded text-center text-cyan-100 focus:outline-none" />
               <span>页</span>
             </div>
           </div>
@@ -842,12 +1260,12 @@ const TaskManagementView = () => {
         <div className="grid grid-cols-4 gap-4 mb-6">
           <div className="flex items-center gap-2">
             <span className="text-sm text-cyan-400/70 whitespace-nowrap w-16 text-right">任务名称:</span>
-            <input type="text" placeholder="请输入任务名称" className="w-full bg-[#030914]/60 border border-[#1e3a8a]/60 rounded pl-3 pr-3 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50" />
+            <input type="text" placeholder="请输入任务名称" className="w-full bg-black/20 backdrop-blur-md border border-white/10 rounded pl-3 pr-3 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50" />
           </div>
           <div className="flex items-center gap-2">
             <span className="text-sm text-cyan-400/70 whitespace-nowrap w-16 text-right">风险等级:</span>
             <div className="relative w-full">
-              <select className="appearance-none w-full bg-[#030914]/60 border border-[#1e3a8a]/60 rounded pl-3 pr-8 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50 cursor-pointer">
+              <select className="appearance-none w-full bg-black/20 backdrop-blur-md border border-white/10 rounded pl-3 pr-8 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50 cursor-pointer">
                 <option value="">请选择风险等级</option>
               </select>
               <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan-400/70 pointer-events-none" />
@@ -855,7 +1273,7 @@ const TaskManagementView = () => {
           </div>
           <div className="flex items-center gap-2">
             <span className="text-sm text-cyan-400/70 whitespace-nowrap w-16 text-right">起止时间:</span>
-            <div className="flex items-center w-full bg-[#030914]/60 border border-[#1e3a8a]/60 rounded overflow-hidden">
+            <div className="flex items-center w-full bg-black/20 backdrop-blur-md border border-white/10 rounded overflow-hidden">
               <input type="text" placeholder="开始时间" className="w-full bg-transparent pl-3 py-1.5 text-sm text-white focus:outline-none" />
               <span className="text-cyan-500/50 px-2">至</span>
               <input type="text" placeholder="结束时间" className="w-full bg-transparent pr-3 py-1.5 text-sm text-white focus:outline-none" />
@@ -864,7 +1282,7 @@ const TaskManagementView = () => {
           <div className="flex items-center gap-2">
             <span className="text-sm text-cyan-400/70 whitespace-nowrap w-16 text-right">任务时效:</span>
             <div className="relative w-full">
-              <select className="appearance-none w-full bg-[#030914]/60 border border-[#1e3a8a]/60 rounded pl-3 pr-8 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50 cursor-pointer">
+              <select className="appearance-none w-full bg-black/20 backdrop-blur-md border border-white/10 rounded pl-3 pr-8 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50 cursor-pointer">
                 <option value="">请选择任务时效</option>
               </select>
               <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan-400/70 pointer-events-none" />
@@ -873,7 +1291,7 @@ const TaskManagementView = () => {
           <div className="flex items-center gap-2">
             <span className="text-sm text-cyan-400/70 whitespace-nowrap w-16 text-right">启停状态:</span>
             <div className="relative w-full">
-              <select className="appearance-none w-full bg-[#030914]/60 border border-[#1e3a8a]/60 rounded pl-3 pr-8 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50 cursor-pointer">
+              <select className="appearance-none w-full bg-black/20 backdrop-blur-md border border-white/10 rounded pl-3 pr-8 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50 cursor-pointer">
                 <option value="">请选择启停状态</option>
               </select>
               <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan-400/70 pointer-events-none" />
@@ -882,7 +1300,7 @@ const TaskManagementView = () => {
           <div className="flex items-center gap-2">
             <span className="text-sm text-cyan-400/70 whitespace-nowrap w-16 text-right">事件类型:</span>
             <div className="relative w-full">
-              <select className="appearance-none w-full bg-[#030914]/60 border border-[#1e3a8a]/60 rounded pl-3 pr-8 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50 cursor-pointer">
+              <select className="appearance-none w-full bg-black/20 backdrop-blur-md border border-white/10 rounded pl-3 pr-8 py-1.5 text-sm text-white focus:outline-none focus:border-cyan-500/50 cursor-pointer">
                 <option value="">请选择事件类型</option>
               </select>
               <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan-400/70 pointer-events-none" />
@@ -895,7 +1313,7 @@ const TaskManagementView = () => {
           </div>
         </div>
 
-        <div className="flex items-center gap-3 pt-4 border-t border-[#1e3a8a]/60/50">
+        <div className="flex items-center gap-3 pt-4 border-t border-white/10">
           <button 
             onClick={() => { setIsModalOpen(true); setCurrentStep(1); }}
             className="flex items-center gap-2 px-4 py-1.5 bg-cyan-600 hover:bg-cyan-500 text-white text-sm font-medium rounded transition-colors shadow-[0_0_15px_rgba(8,145,178,0.4)]"
@@ -910,7 +1328,7 @@ const TaskManagementView = () => {
         <div className="flex-1 overflow-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-[#0a1c3a]/90 text-xs text-cyan-400 font-medium sticky top-0 backdrop-blur-md z-10 border-b border-[#1e3a8a]/60">
+              <tr className="bg-white/5 backdrop-blur-md text-xs text-cyan-400 font-medium sticky top-0 z-10 border-b border-white/10">
                 <th className="p-3 pl-6">任务名称</th>
                 <th className="p-3">事件类型</th>
                 <th className="p-3">风险等级</th>
@@ -922,9 +1340,9 @@ const TaskManagementView = () => {
                 <th className="p-3 text-right pr-6">操作</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#1e3a8a]/40 text-sm text-cyan-100">
+            <tbody className="divide-y divide-white/5 text-sm text-cyan-100">
               {MOCK_TASKS.map((task) => (
-                <tr key={task.id} className="hover:bg-[#0f2546]/60 transition-colors">
+                <tr key={task.id} className="hover:bg-white/5 transition-colors">
                   <td className="p-3 pl-6 text-white">
                     <span>{task.name}</span>
                   </td>
@@ -965,29 +1383,29 @@ const TaskManagementView = () => {
             </tbody>
           </table>
         </div>
-        <div className="p-3 border-t border-[#1e3a8a]/60/50 flex items-center justify-center gap-4 bg-[#030914]/40">
+        <div className="p-3 border-t border-white/10 flex items-center justify-center gap-4 bg-transparent/40">
           <span className="text-xs text-cyan-400/70">Total 81</span>
           <div className="relative">
-            <select className="appearance-none bg-[#030914]/60 border border-[#1e3a8a]/60 rounded pl-3 pr-8 py-1 text-sm text-cyan-100 focus:outline-none focus:border-cyan-500/50 cursor-pointer">
+            <select className="appearance-none bg-black/20 backdrop-blur-md border border-white/10 rounded pl-3 pr-8 py-1 text-sm text-cyan-100 focus:outline-none focus:border-cyan-500/50 cursor-pointer">
               <option>10/page</option>
             </select>
             <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 text-cyan-400/70 pointer-events-none" />
           </div>
           <div className="flex items-center gap-1 text-sm text-cyan-400/70">
-            <button className="w-6 h-6 rounded border border-[#1e3a8a]/60 flex items-center justify-center hover:bg-[#0a1c3a] transition-colors">&lt;</button>
+            <button className="w-6 h-6 rounded border border-white/10 flex items-center justify-center hover:bg-[#0a1c3a] transition-colors">&lt;</button>
             <button className="w-6 h-6 rounded bg-blue-600 text-white flex items-center justify-center">1</button>
-            <button className="w-6 h-6 rounded border border-[#1e3a8a]/60 flex items-center justify-center hover:bg-[#0a1c3a] transition-colors">2</button>
-            <button className="w-6 h-6 rounded border border-[#1e3a8a]/60 flex items-center justify-center hover:bg-[#0a1c3a] transition-colors">3</button>
-            <button className="w-6 h-6 rounded border border-[#1e3a8a]/60 flex items-center justify-center hover:bg-[#0a1c3a] transition-colors">4</button>
-            <button className="w-6 h-6 rounded border border-[#1e3a8a]/60 flex items-center justify-center hover:bg-[#0a1c3a] transition-colors">5</button>
-            <button className="w-6 h-6 rounded border border-[#1e3a8a]/60 flex items-center justify-center hover:bg-[#0a1c3a] transition-colors">6</button>
+            <button className="w-6 h-6 rounded border border-white/10 flex items-center justify-center hover:bg-[#0a1c3a] transition-colors">2</button>
+            <button className="w-6 h-6 rounded border border-white/10 flex items-center justify-center hover:bg-[#0a1c3a] transition-colors">3</button>
+            <button className="w-6 h-6 rounded border border-white/10 flex items-center justify-center hover:bg-[#0a1c3a] transition-colors">4</button>
+            <button className="w-6 h-6 rounded border border-white/10 flex items-center justify-center hover:bg-[#0a1c3a] transition-colors">5</button>
+            <button className="w-6 h-6 rounded border border-white/10 flex items-center justify-center hover:bg-[#0a1c3a] transition-colors">6</button>
             <span>...</span>
-            <button className="w-6 h-6 rounded border border-[#1e3a8a]/60 flex items-center justify-center hover:bg-[#0a1c3a] transition-colors">9</button>
-            <button className="w-6 h-6 rounded border border-[#1e3a8a]/60 flex items-center justify-center hover:bg-[#0a1c3a] transition-colors">&gt;</button>
+            <button className="w-6 h-6 rounded border border-white/10 flex items-center justify-center hover:bg-[#0a1c3a] transition-colors">9</button>
+            <button className="w-6 h-6 rounded border border-white/10 flex items-center justify-center hover:bg-[#0a1c3a] transition-colors">&gt;</button>
           </div>
           <div className="flex items-center gap-2 text-sm text-cyan-400/70">
             <span>Go to</span>
-            <input type="text" defaultValue="1" className="w-10 h-6 bg-[#030914]/60 border border-[#1e3a8a]/60 rounded text-center text-cyan-100 focus:outline-none" />
+            <input type="text" defaultValue="1" className="w-10 h-6 bg-black/20 backdrop-blur-md border border-white/10 rounded text-center text-cyan-100 focus:outline-none" />
           </div>
         </div>
       </GlassPanel>
@@ -1001,7 +1419,7 @@ const TaskManagementView = () => {
           >
             <motion.div 
               initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
-              className="w-full max-w-4xl bg-[#051024] border border-cyan-500/30 rounded-lg shadow-2xl flex flex-col relative overflow-hidden"
+              className="w-full max-w-4xl bg-[#0a1526]/40 backdrop-blur-2xl border border-cyan-500/30 rounded-lg shadow-2xl flex flex-col relative overflow-hidden"
             >
               {/* Corner decorations */}
               <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-cyan-400"></div>
@@ -1010,7 +1428,7 @@ const TaskManagementView = () => {
               <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-cyan-400"></div>
 
               {/* Header */}
-              <div className="flex items-center justify-between p-4 border-b border-[#1e3a8a]/60/50 bg-[#051024]/80">
+              <div className="flex items-center justify-between p-4 border-b border-white/10 bg-[#0a1526]/40 backdrop-blur-2xl">
                 <h3 className="text-lg font-medium text-white mx-auto">新建任务</h3>
                 <button onClick={() => setIsModalOpen(false)} className="absolute right-4 text-cyan-400/70 hover:text-white">
                   <X className="w-5 h-5" />
@@ -1041,12 +1459,12 @@ const TaskManagementView = () => {
                   <div className="w-full max-w-xl space-y-6">
                     <div className="flex items-center gap-4">
                       <span className="w-24 text-right text-sm text-cyan-100"><span className="text-rose-500 mr-1">*</span>任务名称</span>
-                      <input type="text" defaultValue="持刀检测事件001" className="flex-1 bg-[#051024]/80 border border-[#1e3a8a]/60 rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500/50" />
+                      <input type="text" defaultValue="持刀检测事件001" className="flex-1 bg-[#0a1526]/40 backdrop-blur-2xl border border-white/10 rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500/50" />
                     </div>
                     <div className="flex items-center gap-4">
                       <span className="w-24 text-right text-sm text-cyan-100"><span className="text-rose-500 mr-1">*</span>事件类型</span>
                       <div className="relative flex-1">
-                        <select className="appearance-none w-full bg-[#051024]/80 border border-[#1e3a8a]/60 rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500/50 cursor-pointer">
+                        <select className="appearance-none w-full bg-[#0a1526]/40 backdrop-blur-2xl border border-white/10 rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500/50 cursor-pointer">
                           <option>持刀检测事件001</option>
                         </select>
                         <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan-400/70 pointer-events-none" />
@@ -1055,7 +1473,7 @@ const TaskManagementView = () => {
                     <div className="flex items-center gap-4">
                       <span className="w-24 text-right text-sm text-cyan-100"><span className="text-rose-500 mr-1">*</span>风险等级</span>
                       <div className="relative flex-1">
-                        <select className="appearance-none w-full bg-[#051024]/80 border border-[#1e3a8a]/60 rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500/50 cursor-pointer">
+                        <select className="appearance-none w-full bg-[#0a1526]/40 backdrop-blur-2xl border border-white/10 rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500/50 cursor-pointer">
                           <option>高风险</option>
                         </select>
                         <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan-400/70 pointer-events-none" />
@@ -1065,15 +1483,15 @@ const TaskManagementView = () => {
                       <span className="w-24 text-right text-sm text-cyan-100"><span className="text-rose-500 mr-1">*</span>任务时效</span>
                       <div className="flex items-center gap-6 flex-1">
                         <label className="flex items-center gap-2 cursor-pointer">
-                          <input type="radio" name="duration" className="w-4 h-4 text-cyan-500 bg-[#051024] border-[#1e3a8a]/60 focus:ring-cyan-500 focus:ring-offset-[#051024]" />
+                          <input type="radio" name="duration" className="w-4 h-4 text-cyan-500 bg-[#0a1526]/40 backdrop-blur-2xl border-white/10 focus:ring-cyan-500 focus:ring-offset-[#051024]" />
                           <span className="text-sm text-cyan-100">持续任务</span>
                         </label>
                         <label className="flex items-center gap-2 cursor-pointer">
-                          <input type="radio" name="duration" className="w-4 h-4 text-cyan-500 bg-[#051024] border-[#1e3a8a]/60 focus:ring-cyan-500 focus:ring-offset-[#051024]" />
+                          <input type="radio" name="duration" className="w-4 h-4 text-cyan-500 bg-[#0a1526]/40 backdrop-blur-2xl border-white/10 focus:ring-cyan-500 focus:ring-offset-[#051024]" />
                           <span className="text-sm text-cyan-100">周期任务</span>
                         </label>
                         <label className="flex items-center gap-2 cursor-pointer">
-                          <input type="radio" name="duration" defaultChecked className="w-4 h-4 text-cyan-500 bg-[#051024] border-[#1e3a8a]/60 focus:ring-cyan-500 focus:ring-offset-[#051024]" />
+                          <input type="radio" name="duration" defaultChecked className="w-4 h-4 text-cyan-500 bg-[#0a1526]/40 backdrop-blur-2xl border-white/10 focus:ring-cyan-500 focus:ring-offset-[#051024]" />
                           <span className="text-sm text-cyan-100">全天候任务</span>
                         </label>
                       </div>
@@ -1090,8 +1508,8 @@ const TaskManagementView = () => {
                     <div className="flex flex-col gap-2">
                       <span className="text-sm text-cyan-100"><span className="text-rose-500 mr-1">*</span>选择摄像头设备</span>
                       <div className="relative w-full">
-                        <div className="w-full min-h-[40px] bg-[#051024]/80 border border-[#1e3a8a]/60 rounded px-3 py-1.5 flex flex-wrap gap-2 items-center">
-                          <div className="flex items-center gap-1 px-2 py-1 bg-[#0a1c3a] rounded border border-[#1e3a8a]/60 text-xs text-cyan-100">
+                        <div className="w-full min-h-[40px] bg-[#0a1526]/40 backdrop-blur-2xl border border-white/10 rounded px-3 py-1.5 flex flex-wrap gap-2 items-center">
+                          <div className="flex items-center gap-1 px-2 py-1 bg-[#0a1c3a] rounded border border-white/10 text-xs text-cyan-100">
                             持刀设备
                             <X className="w-3 h-3 cursor-pointer hover:text-white" />
                           </div>
@@ -1104,12 +1522,12 @@ const TaskManagementView = () => {
               </div>
 
               {/* Footer */}
-              <div className="p-4 border-t border-[#1e3a8a]/60/50 flex justify-end gap-3 bg-[#051024]/80">
-                <button onClick={() => setIsModalOpen(false)} className="px-6 py-2 bg-[#0a1c3a] hover:bg-[#1e3a8a]/80 text-cyan-100 text-sm rounded transition-colors border border-[#1e3a8a]/60">
+              <div className="p-4 border-t border-white/10 flex justify-end gap-3 bg-[#0a1526]/40 backdrop-blur-2xl">
+                <button onClick={() => setIsModalOpen(false)} className="px-6 py-2 bg-[#0a1c3a] hover:bg-[#1e3a8a]/80 text-cyan-100 text-sm rounded transition-colors border border-white/10">
                   取消
                 </button>
                 {currentStep > 1 && (
-                  <button onClick={() => setCurrentStep(prev => prev - 1)} className="px-6 py-2 bg-[#0a1c3a] hover:bg-[#1e3a8a]/80 text-cyan-100 text-sm rounded transition-colors border border-[#1e3a8a]/60">
+                  <button onClick={() => setCurrentStep(prev => prev - 1)} className="px-6 py-2 bg-[#0a1c3a] hover:bg-[#1e3a8a]/80 text-cyan-100 text-sm rounded transition-colors border border-white/10">
                     上一步
                   </button>
                 )}
@@ -1139,6 +1557,7 @@ export default function App() {
   const navItems = [
     { id: 'home', label: '首页大屏', icon: LayoutDashboard },
     { id: 'monitor', label: '视频监控', icon: MonitorPlay },
+    { id: 'review', label: '事件审核', icon: ClipboardCheck },
     { id: 'events', label: '事件中心', icon: AlertTriangle },
     { id: 'tasks', label: '任务管理', icon: FolderKanban },
     { id: 'algorithms', label: '算法管理', icon: Cpu },
@@ -1147,12 +1566,17 @@ export default function App() {
   ];
 
   return (
-    <div className="h-screen w-full bg-[#030914] text-white font-sans selection:bg-cyan-500/30 overflow-hidden flex flex-col relative">
-      {/* Tech Grid Background */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDEwIEwgNDAgMTAgTSAxMCAwIEwgMTAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgzMCwgNTgsIDEzOCwgMC4xKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] pointer-events-none opacity-50 z-0"></div>
+    <div className="h-screen w-full bg-[#020617] text-white font-sans selection:bg-cyan-500/30 overflow-hidden flex flex-col relative">
+      {/* Aurora Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-cyan-600/20 blur-[120px] mix-blend-screen animate-pulse" style={{ animationDuration: '10s' }}></div>
+        <div className="absolute top-[20%] -right-[10%] w-[40%] h-[60%] rounded-full bg-blue-600/20 blur-[150px] mix-blend-screen animate-pulse" style={{ animationDuration: '15s' }}></div>
+        <div className="absolute -bottom-[20%] left-[20%] w-[60%] h-[50%] rounded-full bg-purple-600/20 blur-[150px] mix-blend-screen animate-pulse" style={{ animationDuration: '12s' }}></div>
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDEwIEwgNDAgMTAgTSAxMCAwIEwgMTAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgzMCwgNTgsIDEzOCwgMC4wNSkiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-30 mix-blend-overlay"></div>
+      </div>
       
       {/* Top Navigation */}
-      <header className="h-16 bg-[#051024]/80 backdrop-blur-xl border-b border-[#1e3a8a]/60 flex items-center justify-between px-6 z-50 shrink-0 relative">
+      <header className="h-16 bg-[#0a1526]/40 backdrop-blur-2xl border-b border-white/10 flex items-center justify-between px-6 z-50 shrink-0 relative">
         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent"></div>
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-[0_0_15px_rgba(8,145,178,0.5)]">
@@ -1193,7 +1617,7 @@ export default function App() {
             <Bell className="w-5 h-5" />
             <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full border border-[#051024]"></span>
           </button>
-          <div className="w-8 h-8 rounded-full bg-[#0a1c3a] border border-[#1e3a8a]/60 flex items-center justify-center cursor-pointer hover:border-cyan-500/50 transition-colors">
+          <div className="w-8 h-8 rounded-full bg-[#0a1c3a] border border-white/10 flex items-center justify-center cursor-pointer hover:border-cyan-500/50 transition-colors">
             <User className="w-4 h-4 text-cyan-100" />
           </div>
         </div>
@@ -1208,6 +1632,7 @@ export default function App() {
         <AnimatePresence mode="wait">
           {activeTab === 'home' && <HomeDashboardView key="home" />}
           {activeTab === 'monitor' && <VideoMonitoringView key="monitor" />}
+          {activeTab === 'review' && <EventReviewView key="review" />}
           {activeTab === 'events' && <EventCenterView key="events" />}
           {activeTab === 'algorithms' && <AlgorithmManagementView key="algorithms" />}
           {activeTab === 'devices' && <DeviceManagementView key="devices" />}
@@ -1231,4 +1656,11 @@ export default function App() {
     </div>
   );
 }
+
+const MOCK_PENDING_ALERTS = [
+  { id: 1, taskId: 'TASK-2023-005', title: '疑似人员未佩戴安全帽', location: '南区施工现场-摄像头02', time: '2023-10-27 14:32:11', img: 'https://picsum.photos/seed/helmet2/400/300' },
+  { id: 2, taskId: 'TASK-2023-008', title: '疑似车辆违停', location: '主干道-东侧监控', time: '2023-10-27 14:28:45', img: 'https://picsum.photos/seed/car2/400/300' },
+  { id: 3, taskId: 'TASK-2023-012', title: '疑似烟火', location: '仓库A区-热成像', time: '2023-10-27 14:15:22', img: 'https://picsum.photos/seed/fire2/400/300' },
+  { id: 4, taskId: 'TASK-2023-005', title: '疑似人员未佩戴安全帽', location: '北区作业面-摄像头05', time: '2023-10-27 14:10:05', img: 'https://picsum.photos/seed/helmet3/400/300' },
+];
 
